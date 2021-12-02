@@ -37,7 +37,11 @@ Product.init(
     },
     category_id: {
       type: DataTypes.INTEGER,
-      // need to add the reference here, as per the readme
+      // adding reference below
+      references: {
+        model: "category",
+        key: "id",
+      }
     }
   },
   {
