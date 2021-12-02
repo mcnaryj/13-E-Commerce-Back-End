@@ -16,47 +16,47 @@ router.get('/', async (req, res) => {
   }
 });
 
-router.get('/:id', (req, res) => {
+router.get('/:id', async (req, res) => {
   // find one category by its `id` value
   // be sure to include its associated Products
   try {
-    const categoryData = await Category.findAll({
-      // find all categories
-      // be sure to include its associated Products
-      include: [{ model: Category }],
+    const categoryData = await Category.findByPk(req.params.id, {
+      include: [{ model: Product }],
     });
+    if (!categoryData) {
+      res.status(400).json({ message: 'No categories found that match the id entered' })
+      return;
+    };
     res.status(200).json(categoryData);
   } catch (err) {
     res.status(500).json(err);
   }
 });
 
-router.post('/', (req, res) => {
+router.post('/', async (req, res) => {
   try {
-    const categoryData = await Category.findAll({
-      // find all categories
-      // be sure to include its associated Products
-      include: [{ model: Category }],
+    // create a new category
+    const categoryData = await Category.create({
+      category_name: req.body.category_name,
     });
     res.status(200).json(categoryData);
   } catch (err) {
-    res.status(500).json(err);
+    res.status(400).json(err);
   }
-  // create a new category
 });
 
-router.put('/:id', (req, res) => {
+router.put('/:id', async (req, res) => {
   try {
-    const categoryData = await Category.findAll({
-      // find all categories
-      // be sure to include its associated Products
-      include: [{ model: Category }],
+    const categoryData = await Category.update(req.body, {
+      // update a category by its `id` value
+      where: {
+        id: req.params.id,
+      },
     });
     res.status(200).json(categoryData);
   } catch (err) {
-    res.status(500).json(err);
+    res.status(400).json(err);
   }
-  // update a category by its `id` value
 });
 
 router.delete('/:id', (req, res) => {
@@ -66,6 +66,10 @@ router.delete('/:id', (req, res) => {
       // be sure to include its associated Products
       include: [{ model: Category }],
     });
+    if (!categoryData) {
+      res.status(400).json({ message: 'No categories found that match the id entered' })
+      return;
+    };
     res.status(200).json(categoryData);
   } catch (err) {
     res.status(500).json(err);
