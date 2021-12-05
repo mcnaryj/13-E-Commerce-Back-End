@@ -59,7 +59,8 @@ This application is intended for users who want to have a place where they can g
 ## Demonstration
 
 The following movie shows the functionality of the app:
-https://www.youtube.com/watch?v=Xc_GST9Am94&feature=youtu.be 
+https://www.youtube.com/watch?v=Xc_GST9Am94&feature=youtu.be.
+
 The user is able to get, post, update and delete the content for each of the categories (category, product and tag). 
 
 ## Notes
