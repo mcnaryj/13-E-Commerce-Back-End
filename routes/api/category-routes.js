@@ -8,7 +8,7 @@ router.get('/', async (req, res) => {
     const categoryData = await Category.findAll({
       // find all categories
       // be sure to include its associated Products
-      include: [{ model: Category }],
+      include: [{ model: Product }],
     });
     res.status(200).json(categoryData);
   } catch (err) {
@@ -68,7 +68,7 @@ router.delete('/:id', async (req, res) => {
       },
     });
     if (!categoryData) {
-      res.status(404).json({ message: 'No categories found that match the id entered' })
+      res.status(404).json({ message: 'No categories found that match the id entered' });
       return;
     };
     res.status(200).json(categoryData);
