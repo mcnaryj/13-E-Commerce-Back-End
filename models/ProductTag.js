@@ -1,5 +1,4 @@
 const { Model, DataTypes } = require('sequelize');
-const { Product, Tag } = require('.');
 
 const sequelize = require('../config/connection');
 
@@ -18,6 +17,7 @@ ProductTag.init(
       references: {
         model: "product",
         key: "id",
+        unique: false
       },
     },
     // define columns
@@ -26,6 +26,7 @@ ProductTag.init(
       references: {
         model: "tag",
         key: "id",
+        unique: false
       }
     }
   },
